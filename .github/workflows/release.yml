@@ -4,20 +4,17 @@ name: Build and Release
 on:
   workflow_dispatch:
 
-# Release version number that must be updated for each release
-env:
-  version_number: '0.0.1'
-
 jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v2.2.2
-        with:
-          python-version: '3.8'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Test release
         run: |
@@ -35,12 +32,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: Test
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v2.2.2
-        with:
-          python-version: '3.8'
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Get version
+        run: echo "version_number=$(cat dbt/adapters/presto/__version__.py | sed -n 's/version = "\(.*\)\"/\1/p')" >> $GITHUB_ENV
 
       - name: Bumping version
         run: |
@@ -52,13 +53,16 @@ jobs:
           git status
 
       - name: Commit version bump and tag
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: 'KNagaVivek'
-          author_email: 'Karnati.Naga.Vivek@ibm.com'
-          message: 'Bumping version to ${{env.version_number}}'
-          tag: v${{env.version_number}}
-          
+        run: |
+          git config --global user.name "KNagaVivek"
+          git config --global user.email "Karnati.Naga.Vivek@ibm.com"
+
+          git add .bumpversion-dbt.cfg .bumpversion.cfg
+          git commit -m "Bumping version to ${{ env.version_number }}"
+          git tag v${{ env.version_number }}
+          git push origin main
+          git push origin v${{ env.version_number }}
+
       # Need to set an output variable because env variables can't be taken as input
       # This is needed for the next step with releasing to GitHub
       - name: Find release type
@@ -67,40 +71,41 @@ jobs:
           IS_PRERELEASE: ${{ contains(env.version_number, 'rc') ||  contains(env.version_number, 'b') }}
         run: |
           echo ::set-output name=isPrerelease::$IS_PRERELEASE
-          
+
       - name: Create GitHub release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: v${{env.version_number}}
-          release_name: dbt-watsonx-presto v${{env.version_number}}
+          release_name: v${{env.version_number}}
           prerelease: ${{ steps.release_type.outputs.isPrerelease }}
           body: |
-            Tracking [dbt-core v${{env.version_number}}](https://github.com/dbt-labs/dbt/releases/tag/v${{env.version_number}}).
-
+            [Release notes](https://github.com/IBM/dbt-watsonx-presto/blob/main/CHANGELOG.md)
             ```sh
             $ pip install dbt-watsonx-presto==${{env.version_number}}
             ```
-          
+
   PypiRelease:
     name: Pypi release
     runs-on: ubuntu-latest
     needs: GitHubRelease
     environment: PypiProd
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Python
-        uses: actions/setup-python@v2.2.2
-        with: 
-          python-version: '3.8'
-          
-      - uses: actions/checkout@v2
+        uses: actions/setup-python@v5
         with:
-          ref: v${{env.version_number}}
-      
+          python-version: '3.11'
+
+      - name: Get version
+        run: echo "version_number=$(cat dbt/adapters/presto/__version__.py | sed -n 's/version = "\(.*\)\"/\1/p')" >> $GITHUB_ENV
+
       - name: Release to pypi
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_USERNAME:  __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           python3 -m venv env

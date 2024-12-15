@@ -18,7 +18,7 @@ There are some tools that will be helpful to you in developing locally. While th
 
 ### Tools
 
-These are the tools used in `dbt-trino` development and testing:
+These are the tools used in `dbt-watsonx-presto` development and testing:
 
 - [`pytest`](https://docs.pytest.org/en/latest/) for defining, discovering, and running tests.
 - [`tox`](https://tox.readthedocs.io/en/latest/) to manage virtual environments across Python versions.
@@ -98,6 +98,17 @@ These commands allow you to run tests directly from the command line.
 
 ### Adding Test Cases
 Whenever you introduce new features or fix bugs, ensure that you add test cases to verify your changes. This includes writing appropriate unit tests for functionality and integration tests where needed. Well-tested code is critical for maintaining long-term project stability.
+
+## adding-changelog-entry
+
+We use [changie](https://changie.dev) to generate `CHANGELOG` entries. **Note:** Do not edit the `CHANGELOG.md` directly. Your modifications will be lost.
+
+Follow the steps to [install `changie`](https://changie.dev/guide/installation/) for your system.
+
+Once changie is installed and your PR is created, simply run `changie new` and changie will walk you through the process of creating a changelog entry.  Commit the file that's created and your changelog entry is complete!
+
+You don't need to worry about which `dbt-watsonx-presto` version your change will go into. Just create the changelog entry with `changie`, and open your PR against the `main` branch.
+
 
 ## Submitting a Pull Request
 
