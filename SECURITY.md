@@ -13,7 +13,7 @@ The following versions of `dbt-watsonx-presto` are currently being supported wit
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in `dbt-watsonx-presto`, please report it by emailing [MAINTAINERS](MAINTAINERS.md) with the following details:
+If you discover a security vulnerability in `dbt-watsonx-presto`, please report it by emailing [MAINTAINERS](https://github.com/IBM/dbt-watsonx-presto/blob/main/MAINTAINERS.md) with the following details:
 - A description of the issue
 - The steps you took to reproduce the issue
 - Affected versions

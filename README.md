@@ -16,7 +16,7 @@ This repository is an evolution of the [dbt-presto](https://github.com/dbt-labs/
 Read the official documentation for using watsonx.data with dbt-watsonx-presto -
 
 - [Documentation for IBM Cloud and SaaS offerrings](https://cloud.ibm.com/docs/watsonxdata?topic=watsonxdata-dbt_watsonx_presto)
-- [Documentation for IBM watsonx.data software](https://www.ibm.com/docs/en/watsonx/watsonxdata/2.0.x?topic=dbt-data-build-tool-adapter-presto)
+- [Documentation for IBM watsonx.data software](https://ibmdocs-test.dcs.ibm.com/docs/en/SSDZ38_2.1.x_test?topic=integration-data-build-tool-adapter-presto)
 
 ### Getting started
 
@@ -73,8 +73,8 @@ For Presto-specific configurations, such as advanced session properties or Prest
 We welcome contributions to the dbt-watsonx-presto project. Here’s how you can help:
 
 - Report Issues: If you encounter bugs or have feature requests, please submit them via [GitHub Issues](https://github.com/IBM/dbt-watsonx-presto/issues).
-- Submit Code: Follow the [Contributing Guide](CONTRIBUTING.md) to submit pull requests with improvements or new features.
+- Submit Code: Follow the [Contributing Guide](https://github.com/IBM/dbt-watsonx-presto/blob/main/CONTRIBUTING.md) to submit pull requests with improvements or new features.
 
 
 ### License
-By contributing to dbt-watsonx-presto, you agree that your contributions will be licensed under the [Apache License Version 2.0 (APLv2)](LICENSE).
+By contributing to dbt-watsonx-presto, you agree that your contributions will be licensed under the [Apache License Version 2.0 (APLv2)](https://github.com/IBM/dbt-watsonx-presto/blob/main/LICENSE).
