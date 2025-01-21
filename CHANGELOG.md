@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## 0.1.1 - December 19, 2024
 ### Fixes
 - Resolved medium and low vulnerabilities present in previous releases.
 
