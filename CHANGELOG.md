@@ -10,6 +10,11 @@
 ### Added
 * Add datatypes support for dbt seeds
 
+## dbt-watsonx-presto 0.1.1 - December 19, 2024
+### Security
+* Fix security vulnerabilities in requirements and dev_requirements
+
+
 ## Previous Releases
 
 For information on prior major and minor releases, see their changelogs:
