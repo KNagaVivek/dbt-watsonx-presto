@@ -1,0 +1,7 @@
+kind: Fixed
+body: Updated the logger in the Presto adapter to use `AdapterLogger`, improving consistency and compatibility with dbt's logging framework
+time: 2025-01-27T15:03:43.621285+05:30
+custom:
+  Author: KNagaVivek
+  Issue: "15"
+  PR: "22"

@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from prestodb.dbapi import Cursor, Connection
 from dbt.adapters.contracts.connection import AdapterResponse, Credentials
 from dbt.adapters.sql import SQLConnectionManager
-from dbt.logger import GLOBAL_LOGGER as logger
+from dbt.adapters.events.logging import AdapterLogger
 from dbt.adapters.exceptions.connection import FailedToConnectError
 from dataclasses import dataclass
 from typing import Optional, Dict, Union
@@ -16,6 +16,8 @@ import re
 import prestodb
 from prestodb.transaction import IsolationLevel
 import sqlparse
+
+logger = AdapterLogger("presto")
 
 class CustomConnection(Connection):
     def cursor(self):
