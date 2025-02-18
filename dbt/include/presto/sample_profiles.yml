@@ -6,9 +6,9 @@ default:
       method: BasicAuth  # one of {none | BasicAuth}
       user: [dev_user]
       password: [password]  # required if method is BasicAuth
-      database: [database name]
       host: [hostname]
-      port: [port number]
+      port: [port_number]
+      catalog: [catalog_name]
       schema: [dev_schema]
       threads: [1 or more]
 
@@ -17,9 +17,9 @@ default:
       method: BasicAuth  # one of {none | BasicAuth}
       user: [prod_user]
       password: [prod_password]  # required if method is BasicAuth
-      database: [database name]
       host: [hostname]
-      port: [port number]
+      port: [port_number]
+      catalog: [catalog_name]
       schema: [prod_schema]
       threads: [1 or more]
   
