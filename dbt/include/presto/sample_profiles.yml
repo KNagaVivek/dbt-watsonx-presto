@@ -3,7 +3,7 @@ default:
 
     dev:
       type: presto
-      method: none  # optional, one of {none | BasicAuth}
+      method: BasicAuth  # one of {none | BasicAuth}
       user: [dev_user]
       password: [password]  # required if method is BasicAuth
       database: [database name]
@@ -14,7 +14,7 @@ default:
 
     prod:
       type: presto
-      method: none  # optional, one of {none | BasicAuth}
+      method: BasicAuth  # one of {none | BasicAuth}
       user: [prod_user]
       password: [prod_password]  # required if method is BasicAuth
       database: [database name]
